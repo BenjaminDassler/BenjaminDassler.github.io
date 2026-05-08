@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr. Benjamin Daßler | Political Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243358;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f8f6f0;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e0ddd5;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(26,39,68,0.97); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--white); letter-spacing: 0.02em; text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(26,39,68,0.92) 0%, rgba(26,39,68,0.75) 50%, rgba(26,39,68,0.88) 100%),
+        url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to top, var(--white), transparent); }
+    .hero-content { max-width: 800px; position: relative; z-index: 1; }
+    .hero-eyebrow { display: inline-block; background: rgba(201,168,76,0.2); border: 1px solid var(--gold); color: var(--gold-light); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1.2rem; border-radius: 2rem; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); color: var(--white); font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero-title { font-size: 1.1rem; color: rgba(255,255,255,0.7); font-weight: 300; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.85); max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; text-decoration: none; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; transition: all 0.25s; }
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.5); color: var(--white); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--navy); font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
+    .divider { width: 50px; height: 3px; background: linear-gradient(to right, var(--gold), var(--gold-light)); margin: 1rem 0 2.5rem; border-radius: 2px; }
+
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+    .about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; box-shadow: 0 20px 60px rgba(26,39,68,0.2); border: 3px solid var(--gold); }
+    .about-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.35rem 0.8rem; background: var(--cream); border: 1px solid var(--border); border-radius: 2rem; color: var(--navy); }
+    .about-main p { font-size: 1.05rem; color: var(--text); margin-bottom: 1.2rem; line-height: 1.8; }
+    .about-main strong { color: var(--navy); }
+    .about-main a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+    .about-main a:hover { color: var(--gold); }
+    .book-card { margin-top: 2rem; padding: 1.5rem; background: var(--cream); border-left: 4px solid var(--gold); border-radius: 0 4px 4px 0; }
+    .book-card .book-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .book-card .book-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); font-weight: 600; margin-bottom: 0.3rem; line-height: 1.4; }
+    .book-card .book-meta { font-size: 0.88rem; color: var(--muted); }
+    .book-card a { color: var(--navy); font-weight: 500; }
+    .book-card a:hover { color: var(--gold); }
+
+    #research { background: var(--cream); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .research-card { background: var(--white); border-radius: 6px; padding: 2rem; border-top: 3px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.25s, box-shadow 0.25s; }
+    .research-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+    .research-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .research-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--navy); margin-bottom: 0.8rem; }
+    .research-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+
+    #publications { background: var(--white); }
+    .pub-list { list-style: none; }
+    .pub-item { padding: 1.6rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 70px 1fr; gap: 1.5rem; align-items: start; }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-year { font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.05em; padding-top: 0.15rem; }
+    .pub-title { font-size: 1rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 0.3rem; }
+    .pub-title a { color: var(--navy); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.4); transition: border-color 0.2s, color 0.2s; }
+    .pub-title a:hover { color: var(--gold); border-color: var(--gold); }
+    .pub-journal { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 0.25rem; }
+    .pub-authors { font-size: 0.83rem; color: var(--muted); }
+    .pub-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2rem; background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); margin-left: 0.5rem; vertical-align: middle; }
+    .pub-section-heading { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2.5rem 0 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold); display: inline-block; }
+
+    #outreach { background: var(--cream); }
+    .outreach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .outreach-card { background: var(--white); border-radius: 6px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .outreach-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold); }
+    .outreach-card ul { list-style: none; }
+    .outreach-card li { font-size: 0.93rem; color: var(--text); padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 0.6rem; }
+    .outreach-card li:last-child { border-bottom: none; }
+    .outreach-card li::before { content: "→"; color: var(--gold); flex-shrink: 0; margin-top: 0.05rem; }
+    .outreach-card a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+    .outreach-card a:hover { color: var(--gold); }
+
+    #contact { background: var(--navy); padding: 4rem 2rem; text-align: center; }
+    #contact .section-title { color: var(--white); }
+    #contact .section-label { color: var(--gold); }
+    #contact p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; font-size: 1rem; }
+    .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.2); padding: 0.6rem 1.4rem; border-radius: 3px; transition: all 0.2s; }
+    .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+    footer { background: #111d33; padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-sidebar { display: flex; gap: 2rem; align-items: flex-start; }
+      .about-photo { width: 180px; flex-shrink: 0; aspect-ratio: 3/4; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .outreach-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .research-grid { grid-template-columns: 1fr; }
+      .about-sidebar { flex-direction: column; }
+      .about-photo { width: 100%; max-width: 280px; }
+      .pub-item { grid-template-columns: 55px 1fr; gap: 1rem; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#"><span>Dr.</span> Benjamin Daßler</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#outreach">Outreach</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">International Political Economy · Global Governance · AI &amp; Digital</div>
+    <h1>Dr. Benjamin <span>Daßler</span></h1>
+    <p class="hero-title">Post-Doctoral Researcher &amp; Principal Investigator · LMU Munich</p>
+    <p class="hero-desc">Who shapes the international rules governing trade, technology, and finance — and who benefits when those rules change? I study how global institutions are contested, captured, and transformed in an era of geopolitical competition.</p>
+    <div class="hero-btns">
+      <a href="#publications" class="btn btn-primary">Recent Publications</a>
+      <a href="#research" class="btn btn-outline">Research Areas</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-sidebar">
+        <img class="about-photo" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Replace with your own photo"/>
+        <div class="about-tags">
+          <span class="tag">IPE</span>
+          <span class="tag">Global Governance</span>
+          <span class="tag">Digital Governance</span>
+          <span class="tag">De-Risking</span>
+          <span class="tag">Autocratic Influence</span>
+          <span class="tag">International Institutions</span>
+          <span class="tag">Regime Complexity</span>
+          <span class="tag">LMU Munich</span>
+        </div>
+      </div>
+      <div class="about-main">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Benjamin Daßler</h2>
+        <div class="divider"></div>
+        <p>I am a post-doctoral researcher and principal investigator of the DFG-funded project <em>The Politics of Contender Institutions</em> (<strong>POLCON</strong>) at the Chair of Global Governance and Public Policy at the Geschwister-Scholl-Institute for Political Science, LMU Munich.</p>
+        <p>I am an international political economist with a particular interest in how global rules get made, contested, and rewritten. My work asks: who shapes the international institutions that govern trade, technology, and finance — and who benefits when those rules change? I focus on three interconnected areas: how states compete over international institutions when the global balance of power shifts; how Europe and other democracies respond to economic vulnerabilities by reducing strategic dependencies — a process known as <strong>de-risking</strong> — across sectors like digital infrastructure, AI, and critical raw materials; and how authoritarian-aligned actors exploit the openness of international organisations and technical standard-setting bodies to quietly embed rules that serve their interests.</p>
+        <p>I completed my doctorate <em>summa cum laude</em> at LMU Munich, hold an M.A. in Political Science from LMU Munich and a B.A. in Social Science with a minor in Political Economy from the University of Augsburg. Since April 2024, I lead the three-year DFG-funded project <strong>POLCON</strong>, which analyses the politics of contender institutions in regime complexes across development finance, digital governance, and climate and energy governance. <a href="https://sites.google.com/view/polcon/start" target="_blank">→ Visit the POLCON project page</a></p>
+        <p>In my research, I apply a broad spectrum of methods, from qualitative process tracing and network analysis to LLM-based text analysis and quantitative regression designs.</p>
+        <div class="book-card">
+          <div class="book-label">📖 Monograph · Oxford University Press · 2024</div>
+          <div class="book-title">The Institutional Topology of International Regime Complexes:<br>Mapping Inter-Institutional Structures in Global Governance</div>
+          <div class="book-meta">Part of the <em>Transformations in Governance</em> series (OUP). The first book to systematically compare the network-based structure of regime complexes across five major issue areas: development finance, financial stability, tax avoidance, intellectual property rights, and energy governance. Drawing on original quantitative and qualitative data, it introduces a new theoretical framework for understanding how clusters of overlapping international institutions are organised and how they shift under geopolitical pressure.<br><br><a href="https://academic.oup.com/book/55135" target="_blank">→ Available at Oxford University Press</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="section-inner">
+    <div class="section-label">What I Work On</div>
+    <h2 class="section-title">Research Areas</h2>
+    <div class="divider"></div>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-icon">🏛️</div>
+        <h3>International Institutions &amp; Regime Complexity</h3>
+        <p>How do overlapping international institutions interact, compete, and evolve? I develop frameworks to map and compare the structure of institutional ecosystems — regime complexes — across global governance domains, from finance to climate to digital trade.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">⚡</div>
+        <h3>Geoeconomic Security &amp; De-Risking</h3>
+        <p>How do states respond when economic interdependence becomes a security liability? I study how Europe and other democracies design de-risking strategies to reduce vulnerabilities in AI, semiconductors, critical raw materials, digital infrastructure, and energy supply chains.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-icon">🌐</div>
+        <h3>Autocratic Influence &amp; Digital Governance</h3>
+        <p>How do authoritarian-aligned actors use the openness of multilateral institutions and technical standard-setting bodies — such as ICANN, the ITU, and 3GPP — to embed illiberal rules? I examine the governance of AI, internet infrastructure, and digital standards as sites of geopolitical contestation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="section-inner">
+    <div class="section-label">Scholarship</div>
+    <h2 class="section-title">Publications</h2>
+    <div class="divider"></div>
+
+    <h3 class="pub-section-heading">Monograph</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://academic.oup.com/book/55135" target="_blank">The Institutional Topology of International Regime Complexes: Mapping Inter-Institutional Structures in Global Governance</a> <span class="pub-badge">OUP</span></div>
+          <div class="pub-journal">Oxford University Press · Transformations in Governance series</div>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="pub-section-heading">Peer-Reviewed Journal Articles</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-year">2026</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.tandfonline.com/doi/full/10.1080/14747731.2026.2653368" target="_blank">Rule-takers or rule-makers? How regional hubs design digital governance frameworks</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">Globalizations</div>
+          <div class="pub-authors">with Sandra Bandemer, Berthold Rittberger, Moritz Weiss &amp; Kathrin Will</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1080/09692290.2025.2589948" target="_blank">Partners and rivals? The AIIB's cooperation with preexisting multilateral development banks</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">Review of International Political Economy (RIPE)</div>
+          <div class="pub-authors">with Angelo Gerber-Helm &amp; Mirko Heinzel</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.tandfonline.com/doi/full/10.1080/13501763.2025.2586854" target="_blank">Caught in the inclusion trap: multistakeholder institutions and autocratic accommodation</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">Journal of European Public Policy (JEPP)</div>
+          <div class="pub-authors">with Nadia El Ghali</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1111/jcms.70029" target="_blank">Beyond the European Army Illusion: A Prudent Strategy for the Real European Zeitenwende</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">JCMS: Journal of Common Market Studies</div>
+          <div class="pub-authors">with Moritz Weiss</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.tandfonline.com/doi/full/10.1080/13501763.2025.2545305" target="_blank">Politics of de-risking: how the EU confronts vulnerabilities in critical digital infrastructures</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">Journal of European Public Policy (JEPP)</div>
+          <div class="pub-authors">with Sandra Bandemer, Berthold Rittberger, Moritz Weiss &amp; Kathrin Will</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1093/isq/sqae146" target="_blank">Insuring the Weak: The Institutional Power Equilibrium in International Organizations</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">International Studies Quarterly, Vol. 69, Issue 1</div>
+          <div class="pub-authors">with Tim Heinkelmann-Wild &amp; Martijn Huysmans</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://link.springer.com/article/10.1007/s11558-024-09574-z" target="_blank">How negative institutional power moderates contestation: Explaining dissatisfied powers' strategies towards international institutions</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">The Review of International Organizations (RIO)</div>
+          <div class="pub-authors">with Tim Heinkelmann-Wild &amp; Andreas Kruck</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://link.springer.com/article/10.1007/s11615-024-00572-9" target="_blank">Navigating Regime Complexes in Turbulent Times — The EU's Interaction with Other International Organizations in Crises</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">Politische Vierteljahresschrift (PVS)</div>
+          <div class="pub-authors">with Sandra Bandemer, Berthold Rittberger &amp; Moritz Weiss</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1093/cjip/poae018" target="_blank">The Contender's Momentum? COVID-19 and IO relations in the regime complex of financial assistance</a></div>
+          <div class="pub-journal">The Chinese Journal of International Politics (CJIP), Vol. 17, Issue 4, pp. 346–378</div>
+          <div class="pub-authors">with Felix Biermann</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.cambridge.org/core/journals/european-journal-of-international-security/article/is-there-a-religious-bias-attitudes-towards-military-humanitarian-intervention-in-germany/D9A785329B05821E242D36A1C16ED746" target="_blank">Is there a religious bias? Attitudes towards Military Humanitarian Intervention in Germany</a> <span class="pub-badge">Open Access</span></div>
+          <div class="pub-journal">European Journal of International Security (EJIS)</div>
+          <div class="pub-authors">with Bernhard Zangl &amp; Hilde van Meegdenburg</div>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="pub-section-heading">Encyclopedia Entry</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.elgaronline.com/display/book/9781035312283/chapter83.xml" target="_blank">Institutions</a></div>
+          <div class="pub-journal">Elgar Encyclopedia of International Relations (eds. Beate Jahn &amp; Sebastian Schindler), Edward Elgar Publishing, pp. 188–189</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="section-inner">
+    <div class="section-label">Beyond the Academy</div>
+    <h2 class="section-title">Public Outreach</h2>
+    <div class="divider"></div>
+    <div class="outreach-grid">
+      <div class="outreach-card">
+        <h3>Blogs &amp; Commentary</h3>
+        <ul>
+          <li><a href="https://blogs.lse.ac.uk/europpblog/" target="_blank">LSE Blog</a> — contributions on EU governance, multilateralism, and de-risking</li>
+          <li><a href="https://verfassungsblog.de" target="_blank">Verfassungsblog</a> — contributions on international order and institutional resilience</li>
+          <li><a href="https://www.zeit.de" target="_blank">DIE ZEIT (Zeit Online)</a> — "Wer die internationale Ordnung retten will, muss sie jetzt zurückbauen"</li>
+          <li><a href="https://www.duckofminerva.com" target="_blank">Duck of Minerva</a> — academic commentary on global governance</li>
+          <li><a href="https://www.e-ir.info" target="_blank">E-International Relations</a> — public-facing scholarship</li>
+        </ul>
+      </div>
+      <div class="outreach-card">
+        <h3>Teaching &amp; Civic Education</h3>
+        <ul>
+          <li>Regular guest lecturer at the <strong>Academy for Political Education Tutzing</strong> on globalization and current challenges in global governance</li>
+          <li>Political education workshop for members of the <strong>German Armed Forces</strong> on Russia's war against Ukraine (with Dr. Julia Baumann)</li>
+          <li>Teacher-training workshop: <em>Der Nahostkonflikt — Fakten, Narrative, Folgen</em></li>
+          <li>Mentor for female MA &amp; PhD students, <strong>LMU Ment@25 programme</strong> (since 2022)</li>
+        </ul>
+      </div>
+      <div class="outreach-card">
+        <h3>Academic Service</h3>
+        <ul>
+          <li>Elected Member, <strong>Ethics Committee, Faculty of Social Sciences</strong>, LMU Munich (since 2021)</li>
+          <li>Elected <strong>Mittelbau Representative</strong>, Geschwister-Scholl-Institute, LMU Munich (since 2021)</li>
+          <li>Reviewer for <em>International Studies Quarterly</em>, <em>JEPP</em>, <em>RIO</em>, <em>EJIR</em>, <em>ZIB</em>, and others</li>
+          <li>Reviewer for the <strong>Austrian Science Fund (FWF)</strong></li>
+        </ul>
+      </div>
+      <div class="outreach-card">
+        <h3>Memberships &amp; Networks</h3>
+        <ul>
+          <li>Member, <strong>German Association of Political Science (DVPW)</strong></li>
+          <li>Member, <strong>DVPW International Organization Working Group (TGIO)</strong></li>
+          <li>Member, <strong>ECPR Research Network on Autocracies and Global Governance</strong></li>
+          <li>Member, <strong>International Studies Association (ISA)</strong></li>
+          <li>Member, <strong>European Consortium for Political Research (ECPR)</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title" style="color:var(--white);">Contact</h2>
+    <div class="divider" style="margin:1rem auto 2rem;"></div>
+    <p>Geschwister-Scholl-Institute for Political Science · LMU Munich<br>Oettingenstraße 67 · 80538 Munich · Germany</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://sites.google.com/view/polcon/start" target="_blank">🔗 POLCON Project</a>
+      <a class="contact-link" href="https://academic.oup.com/book/55135" target="_blank">📖 OUP Monograph</a>
+      <a class="contact-link" href="mailto:benjamin.dassler@gsi.uni-muenchen.de">✉ Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Dr. Benjamin Daßler · Geschwister-Scholl-Institute for Political Science · LMU Munich</p>
+</footer>
+
+</body>
+</html>
